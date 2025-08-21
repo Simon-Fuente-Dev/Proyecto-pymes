@@ -14,14 +14,16 @@ import {
     Divider
 } from "@mui/material";
 //Iconos de mui
-import MenuIcon from '@mui/icons-material/Menu';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import StarIcon from '@mui/icons-material/Star';
 
-import { styled } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
+import { styled } from '@mui/material/styles';
+import {useState} from "react";
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
@@ -33,7 +35,9 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
     },
 }))
 
-// const drawerWidth = 220;
+const drawerWidthOpen = 250;
+const drawerWidthClosed = 75;
+
 
 const items = [
     { label: 'Pagina Principal', icon: <HomeIcon />, path: '/sda' },
@@ -45,22 +49,60 @@ const items = [
 
 const Sidebar = () => {
     const { pathname } = useLocation()
+
+    const [openMenu, setOpenMenu] = useState(true);
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
+            <AppBar
+                position="fixed"
+                sx={{
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                }}
+            >
+                <Toolbar sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <IconButton
+                        onClick={() => {
+                            setOpenMenu(!openMenu);
+                        }}
+                    >
+                        {openMenu ? <MenuOpenIcon /> : <MenuIcon />}
 
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        Mi Panel de Control
+                    </Typography>
+                </Toolbar>
+            </AppBar>
 
             {/* Sidebar permanente */}
             <Drawer
                 variant="permanent"
                 sx={{
+                    width: openMenu ? 'auto' : drawerWidthClosed,
                     flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { boxSizing: 'border-box' },
+                    whiteSpace: "nowrap",
+                    boxSizing: "border-box",
+                    transition: (theme) =>
+                        theme.transitions.create("width", {
+                            easing: theme.transitions.easing.sharp,
+                            duration: theme.transitions.duration.leavingScreen,
+                        }),
+                    [`& .MuiDrawer-paper`]: {
+                        width: openMenu ? 'auto' : drawerWidthClosed,
+                        minWidth: openMenu ? 180 : drawerWidthClosed,
+                        boxSizing: 'border-box',
+                        backgroundColor: '#1e1e1e',
+                        color: '#fff',
+                        transition: (theme) =>
+                            theme.transitions.create('width', {
+                                easing: theme.transitions.easing.sharp,
+                                duration: theme.transitions.duration.standard,
+                            }),
+                    },
                 }}
             >
-                <Toolbar>
-                    <Typography variant="h6">Mi empresa</Typography>
-                </Toolbar>
+                <Toolbar />
                 <Divider />
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
@@ -70,33 +112,37 @@ const Sidebar = () => {
                                 <StyledListItem button
                                     key={item.path}
                                     selected={selected}
+                                                sx={{
+                                                    display: "flex",
+                                                    gap:1
+                                                }}
                                     onClick={() => { console.log(item.path) }}
+
                                 >
-                                    <ListItemIcon>
+                                    <ListItemIcon
+                                        sx={[
+                                            {
+                                                minWidth: 0,
+                                                justifyContent: 'center',
+                                            }
+                                        ]}
+                                    >
                                         {item.icon}
                                     </ListItemIcon>
-                                    <ListItemText primary={item.label}/>
+                                    <ListItemText
+                                        primary={item.label}
+                                        sx={{
+                                            opacity: openMenu ? 1 : 0,
+                                            whiteSpace: 'nowrap',
+                                            overflow: "hidden"
+                                        }}
+                                    />
+
+
                                 </StyledListItem>
                             )
                         })}
-                        {/* <StyledListItem button>
-                            <ListItemIcon>
-                                <HomeIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Pagina Principal" />
-                        </StyledListItem>
-                        <StyledListItem button>
-                            <ListItemIcon>
-                                <BusinessCenterIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Productos y servicios" />
-                        </StyledListItem>
-                        <StyledListItem button>
-                            <ListItemIcon>
-                                <BarChartIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Estadisticas" />
-                        </StyledListItem> */}
+
                     </List>
                 </Box>
             </Drawer>
