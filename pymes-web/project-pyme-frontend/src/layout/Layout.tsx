@@ -1,3 +1,21 @@
-const Layout = () => {
-    
+
+import {Outlet} from 'react-router-dom'
+import {useState, ReactNode} from "react";
+import {Box} from '@mui/material';
+import MenuBar from "./MenuBar.tsx";
+import SideBar from "./SideBar";
+
+const Layout = ({children}: {children: ReactNode}) => {
+    const [openMenu, setOpenMenu] = useState(true);
+    return (
+        <Box sx={{display: "flex"}}>
+            <MenuBar openMenu={openMenu} setOpenMenu={setOpenMenu}/>
+            <SideBar openMenu={openMenu} />
+            <Box component="main" sx={{ flexGrow: 1, mt: '50px', p: 3}}>
+                <Outlet />
+            </Box>
+        </Box>
+    )
 }
+
+export default Layout;

@@ -1,13 +1,7 @@
-import {Routes, Route, Navigate} from 'react-router-dom';
-import Sidebar from './layout/Sidebar';
-// import Layout from ''
-function App() {
+import AppRoutes from './routers/RouterPrincipal.tsx';
 
-  return (
-    <>
-      <Sidebar />
-    </>
-  )
+function App() {
+    return <AppRoutes />;
 }
 
-export default App
+export default App;

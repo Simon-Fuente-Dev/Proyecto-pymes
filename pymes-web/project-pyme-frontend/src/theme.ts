@@ -17,6 +17,23 @@ const theme = createTheme({
                 }
             }
         }
+    },
+    transitions: {
+        duration: {
+            shortest: 250,
+            shorter: 300,
+            short: 400,
+            standard: 500,
+            complex: 700,
+            enteringScreen: 500,
+            leavingScreen: 500,
+        }
+    },
+    zIndex: {
+        appBar: 1200,
+        drawer: 1100,
+        modal: 1300,
+        tooltip: 1500,
     }
 });
 

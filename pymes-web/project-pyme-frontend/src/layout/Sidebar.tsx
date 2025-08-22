@@ -11,7 +11,7 @@ import {
     ListItemText,
     Toolbar,
     Typography,
-    Divider
+    Divider, ListItemButton
 } from "@mui/material";
 //Iconos de mui
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
@@ -19,13 +19,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import StarIcon from '@mui/icons-material/Star';
 
-import MenuIcon from '@mui/icons-material/Menu';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-
-import { styled } from '@mui/material/styles';
-import {useState} from "react";
+import { styled, useTheme } from '@mui/material/styles';
 import { useLocation, useNavigate } from 'react-router-dom'
 
+
+interface Props {
+    openMenu: boolean;
+}
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
@@ -40,83 +40,69 @@ const drawerWidthClosed = 75;
 
 
 const items = [
-    { label: 'Pagina Principal', icon: <HomeIcon />, path: '/sda' },
-    { label: 'Productos y servicios', icon: <BusinessCenterIcon />, path: '/sda' },
-    { label: 'Estadisticas', icon: <BarChartIcon />, path: '/sda' },
-    { label: 'Comentarios y Calificaciones', icon: <StarIcon />, path: '/sda' },
+    { label: 'Pagina Principal', icon: <HomeIcon />, path: '/' },
+    { label: 'Productos y servicios', icon: <BusinessCenterIcon />, path: '/ProductService' },
+    { label: 'Estadisticas', icon: <BarChartIcon />, path: '/Statistics' },
+    { label: 'Reseñas', icon: <StarIcon />, path: '/Review' },
 ];
 
 
-const Sidebar = () => {
+const Sidebar = ({openMenu} : Props) => {
     const { pathname } = useLocation()
-
-    const [openMenu, setOpenMenu] = useState(true);
+    const theme = useTheme();
+    const navigate = useNavigate();
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{
-                    zIndex: (theme) => theme.zIndex.drawer + 1,
-                }}
-            >
-                <Toolbar sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <IconButton
-                        onClick={() => {
-                            setOpenMenu(!openMenu);
-                        }}
-                    >
-                        {openMenu ? <MenuOpenIcon /> : <MenuIcon />}
-
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Mi Panel de Control
-                    </Typography>
-                </Toolbar>
-            </AppBar>
 
             {/* Sidebar permanente */}
             <Drawer
                 variant="permanent"
                 sx={{
-                    width: openMenu ? 'auto' : drawerWidthClosed,
+                    width: openMenu ? drawerWidthOpen : drawerWidthClosed,
                     flexShrink: 0,
                     whiteSpace: "nowrap",
                     boxSizing: "border-box",
-                    transition: (theme) =>
-                        theme.transitions.create("width", {
-                            easing: theme.transitions.easing.sharp,
-                            duration: theme.transitions.duration.leavingScreen,
+                    transition: theme.transitions.create("width", {
+                            easing: theme.transitions.easing.easeInOut,
+                            duration: theme.transitions.duration.standard,
                         }),
                     [`& .MuiDrawer-paper`]: {
-                        width: openMenu ? 'auto' : drawerWidthClosed,
-                        minWidth: openMenu ? 180 : drawerWidthClosed,
+                        width: openMenu ? drawerWidthOpen : drawerWidthClosed,
                         boxSizing: 'border-box',
                         backgroundColor: '#1e1e1e',
                         color: '#fff',
-                        transition: (theme) =>
-                            theme.transitions.create('width', {
-                                easing: theme.transitions.easing.sharp,
+                        transition: theme.transitions.create('width', {
+                                easing: theme.transitions.easing.easeInOut,
                                 duration: theme.transitions.duration.standard,
                             }),
                     },
                 }}
             >
                 <Toolbar />
-                <Divider />
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
                         {items.map((item) => {
                             const selected = pathname === item.path;
                             return (
-                                <StyledListItem button
+                                <ListItemButton
                                     key={item.path}
                                     selected={selected}
-                                                sx={{
-                                                    display: "flex",
-                                                    gap:1
-                                                }}
-                                    onClick={() => { console.log(item.path) }}
+
+                                    onClick={() => { navigate(item.path) }}
+                                    sx={[
+                                        {
+                                            minHeight: 48,
+                                            px: 2.5,
+                                        },
+                                        openMenu
+                                            ? {
+                                                justifyContent: 'initial',
+                                            }
+                                            : {
+                                                justifyContent: 'center',
+                                            },
+                                    ]}
 
                                 >
                                     <ListItemIcon
@@ -124,9 +110,15 @@ const Sidebar = () => {
                                             {
                                                 minWidth: 0,
                                                 justifyContent: 'center',
-                                            }
-                                        ]}
-                                    >
+                                            },
+                                            openMenu
+                                                ? {
+                                                    mr: 3,
+                                                }
+                                                : {
+                                                    mr: 'auto',
+                                                },
+                                        ]}>
                                         {item.icon}
                                     </ListItemIcon>
                                     <ListItemText
@@ -139,7 +131,7 @@ const Sidebar = () => {
                                     />
 
 
-                                </StyledListItem>
+                                </ListItemButton>
                             )
                         })}
 
