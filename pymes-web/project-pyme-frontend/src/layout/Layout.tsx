@@ -8,7 +8,7 @@ import SideBar from "./SideBar";
 const Layout = ({children}: {children: ReactNode}) => {
     const [openMenu, setOpenMenu] = useState(true);
     return (
-        <Box sx={{display: "flex"}}>
+        <Box sx={{display: "flex",  height: '100vh'}}>
             <MenuBar openMenu={openMenu} setOpenMenu={setOpenMenu}/>
             <SideBar openMenu={openMenu} />
             <Box component="main" sx={{ flexGrow: 1, mt: '50px', p: 3}}>
