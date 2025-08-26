@@ -7,7 +7,7 @@ type BentoCardProps = {
     colorIcon: string;
     children?: React.ReactNode;
 }
-const BentoCard = ({title, children, icon, colorIcon}: BentoCardProps) => {
+const BentoCard = ({title, children, icon, colorIcon = 'white'}: BentoCardProps) => {
     const theme = useTheme();
     return (
         <Paper sx={{height: "100%", borderColor: "white", display: "flex", flexDirection: "column"}} elevation={3}
@@ -17,7 +17,7 @@ const BentoCard = ({title, children, icon, colorIcon}: BentoCardProps) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: colorIcon,
+                    color: colorIcon ,
                     ml: "0.25rem",
                     fontSize: {
                         xs: '1.8rem', // móviles

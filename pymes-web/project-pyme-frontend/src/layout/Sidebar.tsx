@@ -43,13 +43,14 @@ const Sidebar = ({openMenu}: Props) => {
     const navigate = useNavigate();
 
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    console.log(isMobile);
     return (
         <Box sx={{display: "flex"}}>
             <CssBaseline/>
 
             {/* Sidebar permanente */}
             <Drawer
-                variant={isMobile ? "pers" : "permanent"}
+                variant={isMobile ? "persistent" : "permanent"}
                 open={openMenu}
                 sx={{
                     width: openMenu ? drawerWidthOpen : drawerWidthClosed,
@@ -83,7 +84,7 @@ const Sidebar = ({openMenu}: Props) => {
                                     selected={selected}
 
                                     onClick={() => {
-                                        se
+
                                         navigate(item.path)
                                     }}
                                     sx={[
