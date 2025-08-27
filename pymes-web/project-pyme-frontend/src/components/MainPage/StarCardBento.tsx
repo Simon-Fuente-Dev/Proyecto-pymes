@@ -7,7 +7,7 @@ import {useLocation, useNavigate} from 'react-router-dom'
 
 
 const Star = ({value}: { value: number }) => {
-    const iconStyle = {fontSize: {xs: 40, sm: 50, md: 60, lg: 80}, color: "gold"};
+    const iconStyle = {fontSize: {xs: 70, sm: 50, md: 60, lg: 80}, color: "gold"};
     if (value === 1) return <StarIcon sx={iconStyle}/>;
     if (value === 0.5) return <StarHalfIcon sx={iconStyle}/>;
     return <StarOutlineIcon sx={iconStyle}/>;
@@ -30,7 +30,8 @@ const StarCardBento = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column"
+            flexDirection: "column",
+            gap: "20px"
         }}>
 
             <Box sx={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>

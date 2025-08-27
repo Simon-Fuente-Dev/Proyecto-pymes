@@ -12,7 +12,7 @@ const BentoCard = ({title, children, icon, colorIcon = 'white'}: BentoCardProps)
     return (
         <Paper sx={{height: "100%", borderColor: "white", display: "flex", flexDirection: "column"}} elevation={3}
                variant="outlined">
-            <Box sx={{display: "flex", alignItems: "center", gap: "0.5rem", borderBottom: "1px solid white"}}>
+            <Box sx={{display: "flex", alignItems: "center", gap: "0.5rem", borderBottom: "1px solid white", paddingBlock: "4px"}}>
                 <Box sx={{
                     display: "flex",
                     alignItems: "center",

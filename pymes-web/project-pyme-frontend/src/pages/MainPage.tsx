@@ -9,6 +9,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import CommentIcon from '@mui/icons-material/Comment';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import ProductServiceCard from "../components/MainPage/ProductServiceCard.tsx";
 
 
 const MainPage = () => {
@@ -19,25 +20,30 @@ const MainPage = () => {
                 <BentoCard
                     title="Mi Calificación"
                     icon={<StarIcon sx={{fontSize: 'inherit'}}/>}
+
                     colorIcon="gold">
                     <StarCardBento/>
                 </BentoCard>
             </div>
             <div className="div2">
                 <BentoCard
-                    title="Estadísticas"
-                    icon={<BarChartIcon sx={{fontSize: 'inherit'}}/>}
-                    colorIcon="#c237db">
-                    <DashCardBento/>
+                    icon={<BusinessCenterIcon sx={{fontSize: 'inherit'}}/>}
+                    title="Top productos y servicios"
+                    colorIcon="#c237db"
+                    >
+                    <ProductServiceCard />
+
                 </BentoCard>
 
             </div>
             <div className="div3">
                 <BentoCard
-                    title="Top productos y servicios"
-                    icon={<BusinessCenterIcon sx={{fontSize: 'inherit'}}/>}
-                    colorIcon="#40f2fe"
-                    >3</BentoCard>
+                    title="Estadísticas"
+                    icon={<BarChartIcon sx={{fontSize: 'inherit'}}/>}
+                    colorIcon="#40f2fe">
+                    <DashCardBento/>
+
+                </BentoCard>
 
             </div>
             <div className="div4">

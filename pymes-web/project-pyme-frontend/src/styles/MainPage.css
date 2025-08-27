@@ -32,4 +32,27 @@
         grid-column: auto !important;
         grid-row: auto !important;
     }
+
+
+}
+
+@media (min-width: 601px) and (max-width: 1550px) {
+    /* Estilos para tablets */
+    .parent {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .div2 {grid-column: span 3 / span 4;grid-row: span 3 / span 4;grid-column-start: 1;grid-row-start: 3;}
+
+    .div4 {
+        grid-column: span 2 / span 2;
+        grid-column-start: 1;
+        grid-row-start: 7;
+    }
+
+    .div5 {
+        grid-column: span 2 / span 2;
+        grid-column-start: 3;
+        grid-row-start: 7;
+    }
 }

@@ -20,6 +20,7 @@ import {useLocation, useNavigate} from 'react-router-dom'
 
 //Media query
 import { useMediaQuery } from '@mui/material';
+import useResponsive from "../hooks/useResponsive.ts";
 
 interface Props {
     openMenu: boolean;
@@ -42,15 +43,16 @@ const Sidebar = ({openMenu}: Props) => {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    console.log(isMobile);
+    const {isMobile} = useResponsive();
+
+    // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     return (
         <Box sx={{display: "flex"}}>
             <CssBaseline/>
 
             {/* Sidebar permanente */}
             <Drawer
-                variant={isMobile ? "persistent" : "permanent"}
+                variant={isMobile ? "temporary" : "permanent"}
                 open={openMenu}
                 sx={{
                     width: openMenu ? drawerWidthOpen : drawerWidthClosed,
