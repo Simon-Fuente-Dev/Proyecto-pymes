@@ -10,6 +10,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ProductServiceCard from "../components/MainPage/ProductServiceCard.tsx";
+import LastCommentCard from "../components/MainPage/LastCommentCard.tsx";
 
 
 const MainPage = () => {
@@ -50,14 +51,18 @@ const MainPage = () => {
                 <BentoCard
                     title="Ultimas Ventas"
                     icon={<MonetizationOnIcon sx={{fontSize: 'inherit'}}/>}
-                    colorIcon="#44F814">4</BentoCard>
+                    colorIcon="#44F814">
+                    4
+                </BentoCard>
 
             </div>
             <div className="div5">
                 <BentoCard
                     title="Ultimos Comentarios"
                     icon={<CommentIcon sx={{fontSize: 'inherit'}}/>}
-                    colorIcon="#FF8000">5</BentoCard>
+                    colorIcon="#FF8000">
+                    <LastCommentCard />
+                </BentoCard>
 
             </div>
         </div>
