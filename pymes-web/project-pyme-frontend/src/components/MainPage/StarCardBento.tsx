@@ -4,7 +4,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import {Box,Chip, Button} from '@mui/material';
 
 import {useLocation, useNavigate} from 'react-router-dom'
-import StarRating from "../StarRating.tsx";
+import StarRating from "../Rehusable/StarRating.tsx";
 
 
 const StarCardBento = () => {

@@ -7,7 +7,7 @@ import SideBar from "./SideBar";
 import {styled, useTheme} from '@mui/material/styles';
 
 const Layout = ({children}: {children: ReactNode}) => {
-    const [openMenu, setOpenMenu] = useState(true);
+    const [openMenu, setOpenMenu] = useState(false);
     const theme = useTheme();
 
     return (

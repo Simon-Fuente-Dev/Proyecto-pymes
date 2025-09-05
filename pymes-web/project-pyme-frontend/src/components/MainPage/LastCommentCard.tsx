@@ -1,5 +1,5 @@
 import {Avatar, Box, Paper, Typography} from "@mui/material"
-import StarRating from "../StarRating.tsx";
+import StarRating from "../Rehusable/StarRating.tsx";
 
 
 type CommentType = {
